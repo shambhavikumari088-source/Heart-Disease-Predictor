@@ -1,0 +1,139 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+
+<style>
+    .dashboard-container {
+        max-width: 1100px;
+        margin: 100px auto 5%;
+        padding: 0 20px;
+    }
+    
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .dashboard-header h1 {
+        font-weight: 700;
+        color: #2ca4b6;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .dashboard-header p {
+        color: #666;
+        font-size: 1.1rem;
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+    }
+
+    .dashboard-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border-bottom: 4px solid transparent;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .dashboard-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        text-decoration: none;
+    }
+
+    /* Distinct bottom border colors for each card */
+    .card-predict:hover { border-bottom-color: #ff4757; }
+    .card-profile:hover { border-bottom-color: #2ca4b6; }
+    .card-history:hover { border-bottom-color: #ffa502; }
+    .card-feedback:hover { border-bottom-color: #2ed573; }
+
+    .card-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    /* Icon distinct colors */
+    .card-predict .card-icon { background: #ffebee; color: #ff4757; }
+    .card-profile .card-icon { background: #e0f7fa; color: #2ca4b6; }
+    .card-history .card-icon { background: #fff8e1; color: #ffa502; }
+    .card-feedback .card-icon { background: #e8f5e9; color: #2ed573; }
+
+    .dashboard-card h3 {
+        color: #333;
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-card p {
+        color: #777;
+        font-size: 0.95rem;
+        margin: 0;
+        line-height: 1.5;
+    }
+</style>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Welcome, {{ request.user.first_name|default:request.user.username }}!</h1>
+        <p>Your personal health dashboard. What would you like to do today?</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Predict Card -->
+        <a href="/add_heartdetail" class="dashboard-card card-predict">
+            <div class="card-icon">
+                <i class="fa fa-heartbeat"></i>
+            </div>
+            <h3>Predict Disease</h3>
+            <p>Take our machine learning assessment to predict your heart disease risk instantly.</p>
+        </a>
+
+        <!-- Profile Card -->
+        <a href="/profile_doctor" class="dashboard-card card-profile">
+            <div class="card-icon">
+                <i class="fa fa-user"></i>
+            </div>
+            <h3>My Profile</h3>
+            <p>View and update your personal details, contact information, and account settings.</p>
+        </a>
+
+        <!-- History Card -->
+        <a href="/view_search_pat" class="dashboard-card card-history">
+            <div class="card-icon">
+                <i class="fa fa-history"></i>
+            </div>
+            <h3>Prediction History</h3>
+            <p>Review your past heart disease prediction results and health history records.</p>
+        </a>
+
+        <!-- Feedback Card -->
+        <a href="/sent_feedback" class="dashboard-card card-feedback">
+            <div class="card-icon">
+                <i class="fa fa-commenting-o"></i>
+            </div>
+            <h3>Send Feedback</h3>
+            <p>Share your experience or report an issue. We value your feedback immensely.</p>
+        </a>
+    </div>
+</div>
+
+{% endblock %}
