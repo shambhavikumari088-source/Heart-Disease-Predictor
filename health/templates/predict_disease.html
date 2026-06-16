@@ -1,63 +1,268 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block body %}
+<style>
+    .prediction-container {
+        padding: 60px 20px;
+        background: #f8fafc;
+        min-height: calc(100vh - 80px);
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .result-card {
+        max-width: 800px;
+        margin: 0 auto 50px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        overflow: hidden;
+        text-align: center;
+        border-top: 8px solid #3498db;
+    }
+    
+    .result-card.danger {
+        border-top-color: #e74c3c;
+    }
+    
+    .result-card.success {
+        border-top-color: #2ecc71;
+    }
+    
+    .result-header {
+        padding: 40px 30px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #edf2f7;
+    }
+    
+    .result-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+    }
+    
+    .danger .result-icon { color: #e74c3c; }
+    .success .result-icon { color: #2ecc71; }
+    
+    .result-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+    
+    .result-message {
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        font-weight: 500;
+    }
+    
+    .danger .result-title { color: #c0392b; }
+    .success .result-title { color: #27ae60; }
+    
+    .result-body {
+        padding: 40px 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+    
+    .accuracy-circle {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: conic-gradient(#3498db {{ accuracy|floatformat:0 }}%, #edf2f7 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .accuracy-circle::before {
+        content: '';
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        background: #fff;
+        border-radius: 50%;
+    }
+    
+    .accuracy-value {
+        position: relative;
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #2c3e50;
+        z-index: 1;
+    }
+    
+    .accuracy-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
 
-	<section class="logins py-5">
-		<div class="container py-xl-5 py-lg-3">
-			<div class="title-section mb-md-5 mb-4">
-				<h6 class="w3ls-title-sub" style="color:red"></h6><br><br><center>
-				<h3 class="w3ls-title text-uppercase text-dark font-weight-bold">Heart Prediction Output</h3></center>
-			</div><hr/>
-			<div class="login px-sm-12" style="width:100%">
+    /* Doctor Section */
+    .doctors-section {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 800;
+        color: #2c3e50;
+        margin-bottom: 40px;
+    }
+    
+    .doctor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    
+    .doctor-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        transition: transform 0.3s;
+        border: 1px solid #edf2f7;
+    }
+    
+    .doctor-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+    
+    .doctor-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+        border: 4px solid #f8f9fa;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .doctor-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+    
+    .doctor-spec {
+        color: #3498db;
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+    
+    .doctor-info {
+        color: #7f8c8d;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .contact-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 25px;
+        background: #3498db;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: background 0.3s;
+    }
+    
+    .contact-btn:hover {
+        background: #2980b9;
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+        .result-body { flex-direction: column; text-align: center; }
+        .result-body > div:last-child { text-align: center !important; }
+        .result-title { font-size: 1.6rem; }
+    }
+</style>
 
-                <h1 align='center' style='color:#414141'>Prediction output</h1><hr><center><p><b>Accuracy (%) is :</b> {{ accuracy }}  </p><p><b>Result:</b>
+<div class="prediction-container">
+    <div class="container">
+        
+        <div class="result-card {% if pred == '0' %}success{% else %}danger{% endif %}">
+            <div class="result-header">
                 {% if pred == "0" %}
-                <span style='color:green'><strong>You are healthy.</strong></span>
+                    <div class="result-icon"><i class="fa fa-check-circle"></i></div>
+                    <h2 class="result-title">You are Healthy!</h2>
+                    <p class="result-message">Based on your clinical parameters, our model indicates a very low risk of cardiovascular disease.</p>
                 {% else %}
-                <span style='color:red'><strong>You may posses a risk of heart disease.</strong></span>
+                    <div class="result-icon"><i class="fa fa-exclamation-triangle"></i></div>
+                    <h2 class="result-title">Elevated Risk Detected</h2>
+                    <p class="result-message">Our model indicates that you may possess a risk for cardiovascular disease. Please consult a healthcare professional.</p>
                 {% endif %}
+            </div>
+            
+            <div class="result-body">
+                <div>
+                    <div class="accuracy-circle">
+                        <span class="accuracy-value">{{ accuracy|floatformat:1 }}%</span>
+                    </div>
+                </div>
+                <div style="text-align: left;">
+                    <div class="accuracy-label">Model Confidence Score</div>
+                    <p style="color: #7f8c8d; max-width: 300px; margin-top: 10px;">This prediction was made using our trained Machine Learning classifier with the confidence level shown above.</p>
+                </div>
+            </div>
+        </div>
 
-            </p></center>
-
-			</div>
-            {% if pred != "0" %}
-
-            <div class="container-fluid" style="width:90%;margin-top:3%">
-                    <div class="container-fluid">
-                        <h1 align="center" class="w3ls-title text-uppercase text-dark font-weight-bold">Contact our doctors</h1>
-                         </div><hr>
-                                <table id="example" class="display" style="width:100%">
-                                  <thead>
-                                    <tr>
-                                      <th>#</th>
-                                      <th>Image</th>
-                                      <th>Full Name</th>
-                                      <th>Email</th>
-                                      <th>Contact</th>
-                                      <th>Address</th>
-
-                                  </tr>
-                              </thead>
-                              <tbody>
-                              {% for i in doctor %}
-                                <tr>
-                                  <td>{{forloop.counter}}</td>
-                                  <td><img src="{{i.image.url}}" style="width:80px;height:90px"></td>
-                                  <td>{{i.user.first_name}} {{i.user.last_name}}</td>
-                                  <td>{{i.user.email}}</td>
-                                  <td>{{i.contact}}</td>
-                                  <td>{{i.address}}</td>
-                              </tr>
-                              {% empty %}
-                              <tr>
-                                  <td colspan="5">No Record Found.</td>
-                              </tr>
-                              {% endfor %}
-                          </tbody>
-                      </table>
-                  </div>
+        {% if pred != "0" %}
+        <div class="doctors-section">
+            <h3 class="section-title">Recommended Cardiologists Near You</h3>
+            
+            {% if doctor %}
+            <div class="doctor-grid">
+                {% for i in doctor %}
+                <div class="doctor-card">
+                    <img src="{{i.image.url}}" class="doctor-img" alt="Doctor Image">
+                    <h4 class="doctor-name">Dr. {{i.user.first_name}} {{i.user.last_name}}</h4>
+                    <div class="doctor-spec">Cardiology Specialist</div>
+                    
+                    <div class="doctor-info">
+                        <i class="fa fa-phone"></i> {{i.contact}}
+                    </div>
+                    <div class="doctor-info">
+                        <i class="fa fa-envelope"></i> {{i.user.email}}
+                    </div>
+                    <div class="doctor-info">
+                        <i class="fa fa-map-marker"></i> {{i.address}}
+                    </div>
+                    
+                    <a href="mailto:{{i.user.email}}" class="contact-btn">Contact Doctor</a>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div style="text-align: center; padding: 40px; background: #fff; border-radius: 15px; color: #7f8c8d; border: 1px solid #edf2f7;">
+                <i class="fa fa-user-md" style="font-size: 3rem; margin-bottom: 20px; color: #bdc3c7;"></i>
+                <h4>No specialist doctors found in your immediate area.</h4>
+                <p>Please contact your local hospital or general practitioner for a referral.</p>
+            </div>
             {% endif %}
-		</div>
-	</section>
+            
+        </div>
+        {% endif %}
+        
+    </div>
+</div>
 
 {% endblock %}
