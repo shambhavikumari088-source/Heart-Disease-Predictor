@@ -80,7 +80,7 @@ $(document).ready(function() {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 0 40px;
+			padding: 0 5%;
 		}
 		.header-logo a {
 			font-size: 1.6rem;
@@ -97,7 +97,7 @@ $(document).ready(function() {
 		.modern-nav {
 			display: flex;
 			align-items: center;
-			gap: 30px;
+			gap: 25px;
 			list-style: none;
 			margin: 0;
 			padding: 0;
@@ -163,9 +163,65 @@ $(document).ready(function() {
 			color: #3498db !important;
 		}
         
+        /* Mobile Menu */
+        .menu-btn {
+            display: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            margin: 0;
+        }
+        #menu-toggle {
+            display: none;
+        }
+        
         @media (max-width: 992px) {
+            .menu-btn {
+                display: block;
+            }
             .modern-nav {
-                display: none; /* Add a hamburger menu for smaller screens in the future if needed */
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1a1a2e;
+                padding: 20px 5%;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                align-items: flex-start;
+            }
+            #menu-toggle:checked ~ .modern-nav {
+                display: flex;
+            }
+            .modern-nav li {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .user-dropdown {
+                width: 100%;
+            }
+            .dropdown-content {
+                position: static;
+                display: none;
+                box-shadow: none;
+                margin-top: 5px;
+                background: rgba(255,255,255,0.05);
+            }
+            .user-dropdown:hover .dropdown-content {
+                display: block;
+            }
+            .dropdown-content a {
+                color: #ecf0f1 !important;
+            }
+            .dropdown-content a:hover {
+                background: transparent;
+                color: #3498db !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .header-logo a {
+                font-size: 1.2rem;
             }
         }
 	</style>
@@ -180,6 +236,9 @@ $(document).ready(function() {
 			</div>
 			
 			<div class="header-menu">
+                <label for="menu-toggle" class="menu-btn"><i class="fa fa-bars"></i></label>
+                <input type="checkbox" id="menu-toggle">
+                
 				<ul class="modern-nav">
 					{% if request.user.is_staff %}
 						<li><a href="{% url 'admin_home' %}">Dashboard</a></li>
