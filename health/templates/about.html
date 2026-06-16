@@ -2,35 +2,266 @@
 {% load static %}
 {% block body %}
 
-<section class="about py-5">
-	<div class="container py-xl-5 py-lg-3">
-		<div class="title-section mb-md-5 mb-4">
-			<center>
-			<h3 class="w3ls-title text-uppercase text-bl font-weight-bold" style="margin-bottom: -20px; margin-top: 20px;">About Us</h3>
-			</center>
-		</div>
-		<hr />
+<style>
+    .resume-container {
+        max-width: 900px;
+        margin: 50px auto 5%;
+        padding: 50px 60px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        font-family: 'Inter', sans-serif;
+    }
+    .resume-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .resume-header h1 {
+        font-weight: 800;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+        font-size: 2.5rem;
+    }
+    .resume-contact {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        color: #7f8c8d;
+        font-size: 1rem;
+    }
+    .resume-contact span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .resume-contact a {
+        color: #3498db;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .resume-contact a:hover {
+        color: #2980b9;
+    }
+    .resume-section {
+        margin-bottom: 40px;
+    }
+    .section-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #2c3e50;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        display: inline-block;
+    }
+    .resume-item {
+        margin-bottom: 25px;
+    }
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 8px;
+    }
+    .item-title {
+        font-weight: 700;
+        color: #34495e;
+        font-size: 1.15rem;
+    }
+    .item-date {
+        color: #3498db;
+        font-size: 0.95rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .item-subtitle {
+        font-style: italic;
+        color: #7f8c8d;
+        margin-bottom: 12px;
+        font-weight: 500;
+    }
+    .resume-list {
+        padding-left: 20px;
+        color: #555;
+        line-height: 1.7;
+    }
+    .resume-list li {
+        margin-bottom: 8px;
+    }
+    .skills-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .skill-category {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+    .skill-title {
+        font-weight: 700;
+        color: #34495e;
+    }
+    .skill-text {
+        color: #555;
+        line-height: 1.6;
+    }
+    
+    @media (min-width: 768px) {
+        .skill-category {
+            flex-direction: row;
+            align-items: baseline;
+            gap: 15px;
+        }
+        .skill-title {
+            min-width: 200px;
+            text-align: right;
+        }
+    }
+</style>
 
-		<div>
-			<center>
-			<img src="{% static 'images/Picture1.png' %}" alt="" class="img-fluid" width="350px" />
-			</center>
-			<br><br>
-		</div>
-		<div>
-			<center>
-			<h6 class="subheading-w3ls text-uppercase text-bl mb-4">Heart Disease Prediction - A <span style="color: #61bebc;">BinaryCoders</span> Product</h6>
-			</center>
-			<p>Machine Learning is used across many spheres around the world. The healthcare industry is no exception.
-				Machine Learning can play an essential role in predicting presence/absence of Locomotor disorders, Heart
-				diseases and more. Such information, if predicted well in advance, can provide important insights to
-				doctors who can then adapt their diagnosis and treatment per patient basis.</p>
-		</div>
+<div class="container-fluid" style="background: #f4f7f6; padding: 40px 0;">
+    <div class="resume-container">
+        <div class="resume-header">
+            <h1>SHAMBHAVI KUMARI</h1>
+            <div class="resume-contact">
+                <span><i class="fa fa-map-marker"></i> Ranchi, Jharkhand 834004</span>
+                <span><i class="fa fa-phone"></i> +91 9346658701</span>
+                <span><i class="fa fa-envelope"></i> <a href="mailto:shambhavikumari088@gmail.com">shambhavikumari088@gmail.com</a></span>
+                <span><i class="fa fa-linkedin"></i> <a href="https://linkedin.com/in/shambhavi-kumari-app" target="_blank">LinkedIn</a></span>
+            </div>
+        </div>
 
+        <div class="resume-section">
+            <h2 class="section-title">Education</h2>
+            <div class="resume-item">
+                <div class="item-header">
+                    <span class="item-title">Lovely Professional University</span>
+                    <span class="item-date">2023 - 2027</span>
+                </div>
+                <div class="item-subtitle">Bachelor’s in Technology - Biotechnology | CGPA: 7.2 | Phagwara, Punjab</div>
+            </div>
+            <div class="resume-item">
+                <div class="item-header">
+                    <span class="item-title">Tender Heart Senior Secondary School</span>
+                    <span class="item-date">2022 - 2023</span>
+                </div>
+                <div class="item-subtitle">12th Grade | Percentage: 86% | Ranchi, Jharkhand</div>
+            </div>
+            <div class="resume-item">
+                <div class="item-header">
+                    <span class="item-title">Tender Heart Senior Secondary School</span>
+                    <span class="item-date">2020 - 2021</span>
+                </div>
+                <div class="item-subtitle">10th Grade | CGPA: 7 | Ranchi, Jharkhand</div>
+            </div>
+        </div>
 
-	</div>
-	</div>
-</section>
+        <div class="resume-section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <span class="skill-title">Languages:</span>
+                    <span class="skill-text">Python, BioPython</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-title">Soft Skills:</span>
+                    <span class="skill-text">Communication, teamwork and collaboration, problem solving, critical thinking, time management, adaptability, analytical thinking, attention to detail.</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-title">Domain Skills:</span>
+                    <span class="skill-text">Data analysis, CRISPR technology, bioremediation, biofertilizers, responsive web design, scripting in BioPython.</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-title">Dry Laboratory Skills:</span>
+                    <span class="skill-text">Data analysis, bioinformatics tools, in-silico gene and protein analysis, molecular docking, sequence alignment, statistical modelling.</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-title">Wet Laboratory Skills:</span>
+                    <span class="skill-text">Media preparation, microbial culture handling, PCR/RT-PCR, gel electrophoresis, blotting techniques, spectrophotometry, water and product testing, environmental monitoring, aseptic techniques, use of Laminar Air Flow.</span>
+                </div>
+            </div>
+        </div>
 
+        <div class="resume-section">
+            <h2 class="section-title">Internships</h2>
+            <div class="resume-item">
+                <div class="item-header">
+                    <span class="item-title">QC Microbiology Intern</span>
+                    <span class="item-date">Jun 2025 - Jul 2025</span>
+                </div>
+                <div class="item-subtitle">Centrient Pharmaceutical Company</div>
+                <ul class="resume-list">
+                    <li>Conducted media preparation and sterilization (MCB, SCDM, Peptone) and operated autoclaves under aseptic conditions, ensuring contamination-free testing.</li>
+                    <li>Performed water testing, product testing, and environmental monitoring (air, surface, and personnel sampling), following SOPs, GMP, and biosafety protocols.</li>
+                    <li>Carried out microbial culture inoculations and sterility testing using Bacillus subtilis and other strains, supporting pharmaceutical product quality control.</li>
+                    <li>Worked in Laminar Air Flow (LAF) benches for aseptic handling and maintained detailed SOP logbooks for media, reagents, and QC activities.</li>
+                    <li>Gained cross-functional exposure to the Bulk Drug Lab, Raw Material Lab, and Instrumentation Lab, learning analytical techniques including normality checks, moisture analysis, optical rotation, and chromatography methods.</li>
+                    <li>Strengthened knowledge of quality culture, GMP compliance, and pharmaceutical documentation practices, ensuring reliability in QC processes.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-title">Projects</h2>
+            
+            <div class="resume-item">
+                <div class="item-header">
+                    <span class="item-title">Cutter Mill with Sieve Separator</span>
+                    <span class="item-date">Nov 2025</span>
+                </div>
+                <div class="item-subtitle">Mechanical design, prototype development, problem solving</div>
+                <ul class="resume-list">
+                    <li>Designed and built a prototype cutter mill integrated with a sieve separator for particle size reduction and separation.</li>
+                    <li>Developed a hopper-based feeding and grinding system powered by a motor.</li>
+                    <li>Implemented a sieve unit for particle size classification after milling.</li>
+                    <li>Demonstrated principles of size reduction and material processing used in pharmaceutical and biotech industries.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <div class="item-header">
+                    <span class="item-title">Heart Disease Prediction Using Machine Learning</span>
+                    <span class="item-date">Jul 2024</span>
+                </div>
+                <div class="item-subtitle">Machine Learning, Data Analysis</div>
+                <ul class="resume-list">
+                    <li>Developed a machine learning model to predict the risk of heart disease using patient clinical data.</li>
+                    <li>Performed data preprocessing, feature selection, and dataset cleaning to improve model accuracy.</li>
+                    <li>Applied machine learning algorithms such as Logistic Regression, Decision Tree, and Random Forest for disease prediction.</li>
+                    <li>Evaluated model performance using accuracy, precision, recall, and confusion matrix analysis.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <div class="item-header">
+                    <span class="item-title">Automated Washroom / Traffic Light Control System</span>
+                    <span class="item-date">Aug 2023</span>
+                </div>
+                <div class="item-subtitle">8051 Microcontroller, Assembly Language</div>
+                <ul class="resume-list">
+                    <li>Designed and implemented an automated traffic light control system using 8051 microcontroller architecture to manage signal sequencing.</li>
+                    <li>Programmed the system in Assembly language to perform arithmetic, logical, and control operations for accurate signal timing.</li>
+                    <li>Interfaced LEDs, switches, timers, and seven-segment displays with the microcontroller to simulate real-world traffic flow and pedestrian signals.</li>
+                    <li>Implemented delay subroutines and timer interrupts to ensure precise control of signal timing and smooth transitions.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-title">Certificates & Certifications</h2>
+            <ul class="resume-list">
+                <li><strong>SQL Beginner to Advanced</strong> – Code Basics <span style="float: right; color: #3498db; font-weight: 600;">Aug 2025</span></li>
+                <li><strong>Business English</strong> – Saylor Academy <span style="float: right; color: #3498db; font-weight: 600;">Jun 2024</span></li>
+                <li><strong>Skill Development Course</strong> – Lovely Professional University <span style="float: right; color: #3498db; font-weight: 600;">Sep 2023</span></li>
+                <li><strong>Fundamental English MOOC</strong> – Saylor Academy <span style="float: right; color: #3498db; font-weight: 600;">Sep 2023</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
