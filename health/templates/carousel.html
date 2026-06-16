@@ -2,11 +2,231 @@
 {% load static %}
 {% block body %}
 
-<div class="banner_w3lspvt" style="margin-top:6%">
-	<center>
-		<br>
-			<img src="{% static 'images/heart.jpg' %}" alt="" height="550px" >
-			</center>
-		</div>
+<style>
+    .modern-hero {
+        position: relative;
+        padding: 120px 0;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: #fff;
+        overflow: hidden;
+        margin-top: -2%; /* Adjust for index.html wrapper */
+    }
+    
+    .hero-bg-shape {
+        position: absolute;
+        top: -20%;
+        right: -10%;
+        width: 50%;
+        height: 140%;
+        background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
+        transform: rotate(-15deg);
+        border-radius: 30%;
+        z-index: 1;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .hero-badge {
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(52, 152, 219, 0.2);
+        color: #3498db;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+        border: 1px solid rgba(52, 152, 219, 0.3);
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 25px;
+        background: linear-gradient(to right, #fff, #bdc3c7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.15rem;
+        color: #b2bec3;
+        line-height: 1.6;
+        margin-bottom: 40px;
+        font-weight: 400;
+    }
+    
+    .hero-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .btn-primary-modern {
+        background: #3498db;
+        color: #fff;
+        padding: 14px 35px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .btn-primary-modern:hover {
+        background: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    .btn-outline-modern {
+        background: transparent;
+        color: #fff;
+        padding: 14px 35px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .btn-outline-modern:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #fff;
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    /* Features Section */
+    .features-section {
+        padding: 80px 0;
+        background: #f8f9fa;
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    
+    .section-header h2 {
+        font-weight: 800;
+        color: #2c3e50;
+        font-size: 2.2rem;
+    }
+    
+    .section-header p {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+    }
+    
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .feature-card {
+        background: #fff;
+        padding: 40px 30px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .feature-icon {
+        width: 70px;
+        height: 70px;
+        background: rgba(52, 152, 219, 0.1);
+        color: #3498db;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin: 0 auto 25px;
+    }
+    
+    .feature-title {
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+    }
+    
+    .feature-desc {
+        color: #7f8c8d;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        .modern-hero {
+            padding: 80px 20px;
+        }
+    }
+</style>
+
+<div class="modern-hero">
+    <div class="hero-bg-shape"></div>
+    <div class="container hero-content">
+        <span class="hero-badge"><i class="fa fa-stethoscope"></i> AI-Powered Healthcare</span>
+        <h1 class="hero-title">Predict Heart Disease With Machine Learning</h1>
+        <p class="hero-subtitle">Our advanced predictive model analyzes your medical history and vital signs to provide an accurate risk assessment for cardiovascular diseases, empowering you to make informed health decisions.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'login' %}" class="btn-primary-modern">Get Started Now</a>
+            <a href="{% url 'about' %}" class="btn-outline-modern">Learn More</a>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="section-header">
+        <h2>Why Choose Our System?</h2>
+        <p>Combining modern technology with healthcare insights.</p>
+    </div>
+    
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa fa-line-chart"></i></div>
+            <h3 class="feature-title">High Accuracy</h3>
+            <p class="feature-desc">Our Machine Learning models are trained on extensive clinical datasets to provide reliable and highly accurate predictions.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa fa-shield"></i></div>
+            <h3 class="feature-title">Secure & Private</h3>
+            <p class="feature-desc">Your medical data is completely secure. We use enterprise-grade encryption to protect your sensitive health information.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa fa-bolt"></i></div>
+            <h3 class="feature-title">Instant Results</h3>
+            <p class="feature-desc">No more waiting. Get your cardiovascular risk assessment immediately after entering your medical parameters.</p>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
