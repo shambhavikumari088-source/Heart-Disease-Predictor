@@ -73,27 +73,28 @@ def Login_User(request):
         u = request.POST['uname']
         p = request.POST['pwd']
         user = authenticate(username=u, password=p)
-        sign = ""
         if user:
+            # Check if patient
             try:
                 sign = Patient.objects.get(user=user)
+                login(request, user)
+                return redirect('patient_home')
             except:
                 pass
-            if sign:
-                login(request, user)
-                error = "pat1"
-            else:
-                pure=False
-                try:
-                    pure = Doctor.objects.get(status=1,user=user)
-                except:
-                    pass
-                if pure:
+                
+            # Check if doctor
+            try:
+                pure = Doctor.objects.get(user=user)
+                if pure.status == 1:
                     login(request, user)
-                    error = "pat2"
+                    return redirect('doctor_home')
                 else:
-                    login(request, user)
-                    error="notmember"
+                    error = "notmember"
+            except:
+                pass
+                
+            if not error:
+                error = "not"
         else:
             error="not"
     d = {'error': error}
@@ -105,9 +106,9 @@ def Login_admin(request):
         u = request.POST['uname']
         p = request.POST['pwd']
         user = authenticate(username=u, password=p)
-        if user.is_staff:
+        if user and user.is_staff:
             login(request, user)
-            error="pat"
+            return redirect('admin_home')
         else:
             error="not"
     d = {'error': error}
