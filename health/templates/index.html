@@ -286,34 +286,110 @@ $(document).ready(function() {
 
 
 	<!-- footer bottom -->
-	<!-- copyright -->
-	<div class="copy-w3pvt" style="background:rgb(44, 164, 182);color:white">
-		<div class="container py-3">
-			<div class="row">
-				<div class="col-lg-7 w3ls_footer_grid1_left text-lg-left text-center">
-					<p style="color:white">&copy; 2021 Heart Disease Prediction. All rights reserved | Design by BinaryCoders</a>
-					</p>
+	<style>
+		.modern-footer {
+			background-color: #1a1a2e;
+			color: #ecf0f1;
+			padding: 40px 0 20px;
+			font-family: 'Inter', sans-serif;
+			margin-top: auto;
+		}
+		.footer-content {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: center;
+			gap: 20px;
+			padding-bottom: 20px;
+			border-bottom: 1px solid rgba(255,255,255,0.1);
+		}
+		.footer-brand h4 {
+			color: #fff;
+			font-weight: 700;
+			margin: 0;
+			font-size: 1.4rem;
+			letter-spacing: 0.5px;
+		}
+		.footer-brand p {
+			color: #bdc3c7;
+			font-size: 0.9rem;
+			margin: 5px 0 0;
+		}
+		.footer-socials {
+			display: flex;
+			gap: 15px;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.footer-socials li a {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 40px;
+			height: 40px;
+			background: rgba(255,255,255,0.05);
+			color: #ecf0f1;
+			border-radius: 50%;
+			text-decoration: none;
+			transition: all 0.3s ease;
+		}
+		.footer-socials li a:hover {
+			background: #3498db;
+			color: #fff;
+			transform: translateY(-3px);
+			box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+		}
+		.footer-bottom {
+			text-align: center;
+			padding-top: 20px;
+			color: #7f8c8d;
+			font-size: 0.85rem;
+		}
+		.move-top-btn {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			background: #3498db;
+			color: #fff;
+			width: 45px;
+			height: 45px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-decoration: none;
+			box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+			transition: all 0.3s ease;
+			z-index: 99;
+		}
+		.move-top-btn:hover {
+			background: #2980b9;
+			color: #fff;
+			transform: translateY(-3px);
+		}
+	</style>
+	
+	<footer class="modern-footer">
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-brand">
+					<h4>Heart Disease Predictor</h4>
+					<p>Empowering health decisions with Machine Learning.</p>
 				</div>
-				<div class="col-lg-5 w3ls_footer_grid_left1_pos text-lg-right text-center mt-lg-0 mt-2">
-					<ul style="color:white">
-						<li>
-							<a href="#" style="color:white" class="facebook">
-								<span class="fa fa-facebook-f mr-2"></span>Facebook</a>
-						</li>
-						<li class="mx-3">
-							<a href="#" style="color:white" class="twitter">
-								<span class="fa fa-twitter mr-2"></span>Twitter</a>
-						</li>
-						<li>
-							<a href="#" style="color:white" class="google">
-								<span class="fa fa-google-plus mr-2"></span>Google Plus</a>
-						</li>
-					</ul>
-				</div>
+				<ul class="footer-socials">
+					<li><a href="https://linkedin.com/in/shambhavi-kumari-app" target="_blank" title="LinkedIn"><span class="fa fa-linkedin"></span></a></li>
+					<li><a href="mailto:shambhavikumari088@gmail.com" title="Email"><span class="fa fa-envelope"></span></a></li>
+					<li><a href="https://github.com/shambhavikumari088-source" target="_blank" title="GitHub"><span class="fa fa-github"></span></a></li>
+				</ul>
+			</div>
+			<div class="footer-bottom">
+				&copy; 2026 Heart Disease Predictor. Developed by Shambhavi Kumari.
 			</div>
 		</div>
-	</div>
-	<a href="#home" style="color:white" class="move-top text-center"></a>
+	</footer>
+
+	<a href="#home" class="move-top-btn"><span class="fa fa-arrow-up"></span></a>
 
 </body>
 
