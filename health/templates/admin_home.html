@@ -3,101 +3,167 @@
 {% block body %}
 
 <style>
-.glow {
-  font-size: 80px;
-  color: #fff;
-  text-align: center;
-  -webkit-animation: glow 1s ease-in-out infinite alternate;
-  -moz-animation: glow 1s ease-in-out infinite alternate;
-  animation: glow 1s ease-in-out infinite alternate;
-}
-
-@-webkit-keyframes glow {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
-  }
-
-  to {
-    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
-  }
-}
-
-/* Rounded border */
-hr.rounded {
-  border-top: 8px solid lightblue;
-  border-radius: 5px;
-}
-
-.prjdiv:hover{
-transform:translateY(-10px)
-}
-div .container1{
-
-width:100%;
-background-color:white;
-border-radius:8px;
-}
-h2, h4{
- padding:10Px;
-}
-
+    .admin-dashboard {
+        background: #f4f7f6;
+        min-height: calc(100vh - 80px);
+        padding: 60px 0;
+        font-family: 'Inter', sans-serif;
+    }
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .dashboard-header h1 {
+        font-weight: 800;
+        color: #2c3e50;
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
+    .dashboard-header p {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 10px auto 0;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .stat-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 30px 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none !important;
+        border-bottom: 5px solid transparent;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+    
+    .stat-card.doctors { border-color: #3498db; }
+    .stat-card.patients { border-color: #2ecc71; }
+    .stat-card.feedback { border-color: #f1c40f; }
+    .stat-card.searches { border-color: #9b59b6; }
+    
+    .stat-info {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .stat-value {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #2c3e50;
+        line-height: 1;
+        margin-bottom: 5px;
+    }
+    
+    .stat-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .stat-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+    }
+    
+    .stat-card.doctors .stat-icon { background: rgba(52, 152, 219, 0.1); color: #3498db; }
+    .stat-card.patients .stat-icon { background: rgba(46, 204, 113, 0.1); color: #2ecc71; }
+    .stat-card.feedback .stat-icon { background: rgba(241, 196, 15, 0.1); color: #f1c40f; }
+    .stat-card.searches .stat-icon { background: rgba(155, 89, 182, 0.1); color: #9b59b6; }
+    
+    .welcome-section {
+        text-align: center;
+        margin-top: 60px;
+        padding: 40px 20px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .welcome-section h2 {
+        font-weight: 700;
+        color: #34495e;
+        margin-bottom: 15px;
+    }
+    
+    .welcome-section p {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+    }
 </style>
 
-
-<div class="container-fluid" style="margin-top:8%;width:100%">
-    <div class="container-fluid">
-        <h1 align="center" style="font-weight:bold;font-family:roman">ADMIN DASHBOARD</h1><hr/><br>
+<div class="admin-dashboard">
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Admin Dashboard</h1>
+            <p>Overview of the Heart Disease Predictor system performance and user metrics.</p>
+        </div>
+        
+        <div class="stats-grid">
+            <a href="{% url 'view_doctor' %}" class="stat-card doctors">
+                <div class="stat-info">
+                    <span class="stat-value">{{doc}}</span>
+                    <span class="stat-label">Total Doctors</span>
+                </div>
+                <div class="stat-icon"><i class="fa fa-user-md"></i></div>
+            </a>
+            
+            <a href="{% url 'view_patient' %}" class="stat-card patients">
+                <div class="stat-info">
+                    <span class="stat-value">{{pat}}</span>
+                    <span class="stat-label">Total Patients</span>
+                </div>
+                <div class="stat-icon"><i class="fa fa-users"></i></div>
+            </a>
+            
+            <a href="{% url 'view_feedback' %}" class="stat-card feedback">
+                <div class="stat-info">
+                    <span class="stat-value">{{feed}}</span>
+                    <span class="stat-label">Feedback</span>
+                </div>
+                <div class="stat-icon"><i class="fa fa-comments"></i></div>
+            </a>
+            
+            <a href="{% url 'view_search_pat' %}" class="stat-card searches">
+                <div class="stat-info">
+                    <span class="stat-value">{{dis}}</span>
+                    <span class="stat-label">Predictions</span>
+                </div>
+                <div class="stat-icon"><i class="fa fa-heartbeat"></i></div>
+            </a>
+        </div>
+        
+        <div class="welcome-section">
+            <h2>Welcome back, System Admin</h2>
+            <p>Select any of the cards above to manage the respective records in the database. Ensure all patient data and feedback are handled securely.</p>
+        </div>
     </div>
-             <div class="row">
+</div>
 
-			        <div class="col-md-6" ><a href="{% url 'view_doctor' %}">
-						<div style="margin:1%;padding:10px;background:#47769c;color:white;">
-						<h3 style="font-weight:bold;font-size:35px">{{doc}}</h3>
-						        <h4 style="font-weight:bold;">Total Doctors</h4>
-						        <p style="color:black">All access are given .</p>
-							</div></a>
-					</div>
-
-
-					<div class="col-md-6" ><a href="{% url 'view_patient' %}">
-						    <div style="padding:10px;margin:1%;background:#61bbb9;color:white;">
-						        <h3 style="font-weight:bold;font-size:35px">{{pat}}</h3>
-						        <h4 style="font-weight:bold;">Total Patients</h4>
-						        <p style="color:black">All access are given .</p>
-							</div></a>
-							</div>
-
-				</div>
-				<div class="row">
-					<div class="col-md-6" >
-						<a href="{% url 'view_feedback' %}">
-					<div style="padding:10px;margin:1%;background:#538482;color:white;">
-								<h3 style="font-weight:bold;font-size:35px">{{feed}}</h3>
-						        <h4 style="font-weight:bold;">Total Feedback</h4>
-						        <p style="color:black">All access are given .</p>
-					</div></a>
-					</div>
-
-						<div class="col-md-6" >
-							<a href="{% url 'view_search_pat' %}">
-								<div style="padding:10px;margin:1%;background:#4b605f;color:white;">
-						        <h3 style="font-weight:bold;font-size:35px">{{dis}}</h3>
-						        <h4 style="font-weight:bold;">Searched Quantity</h4>
-						        <p style="color:black">All access are given .</p>
-</a>
-							</div>
-						</div>
-
-
-             </div>
-		
-
-	<div>
-		<hr>
-		<br>
-		<center>
-     <h1>Welcome Admin</h1>
-	</center>
-	<br><br>
-    </div>
 {% endblock %}
