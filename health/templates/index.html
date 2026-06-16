@@ -65,217 +65,182 @@ $(document).ready(function() {
 
 <body>
 	<!-- main -->
-	<div id="home" style="margin-bottom:2%">
-		<!-- top header -->
-		<header>
-			<div class="top-bar py-3">
-				<div class="container">
-					<div class="row">
-						
-						<div class="col-xl-7 col-lg-6 col-md-4 top-social-agile text-md-right text-center mt-md-0 mt-2">
-							<div class="row">
-								<div class="offset-xl-6 offset-lg-4">
-								</div>
-								<div class="col-xl-3 col-lg-4 col-6 top-w3layouts p-md-0 text-right">
-									<!-- login -->
-									<a href="{% url 'login' %}" class="login-button-2 text-uppercase text-bl">
-										</a>
-									<!-- //login -->
-								</div>
-								<div class="col-xl-3 col-lg-4 col-6 header-w3layouts text-md-right text-left">
-									<!-- register -->
-									<a href="{% url 'signup' %}" class="login-button-2 text-uppercase text-bl">
-										</a>
-									<!-- //register -->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+	<div id="home" style="margin-bottom: 2%">
+	<!-- modern header -->
+	<style>
+		.modern-header {
+			background-color: #1a1a2e;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+			position: sticky;
+			top: 0;
+			z-index: 1000;
+			padding: 15px 0;
+		}
+		.modern-header .container-fluid {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 40px;
+		}
+		.header-logo a {
+			font-size: 1.6rem;
+			font-weight: 800;
+			color: #fff;
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+		.header-logo .logo-sp {
+			color: #3498db;
+		}
+		.modern-nav {
+			display: flex;
+			align-items: center;
+			gap: 30px;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.modern-nav li a {
+			color: #ecf0f1;
+			font-weight: 600;
+			font-size: 1.05rem;
+			text-decoration: none;
+			transition: color 0.3s;
+		}
+		.modern-nav li a:hover, .modern-nav li a.active {
+			color: #3498db;
+		}
+		.user-dropdown {
+			position: relative;
+			display: inline-block;
+		}
+		.user-dropdown-btn {
+			background: rgba(255,255,255,0.05);
+			color: #fff !important;
+			padding: 10px 20px;
+			border-radius: 8px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: background 0.3s;
+		}
+		.user-dropdown-btn:hover {
+			background: #3498db;
+			color: #fff !important;
+			text-decoration: none;
+		}
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			right: 0;
+			top: 100%;
+			margin-top: 10px;
+			background-color: #fff;
+			min-width: 180px;
+			box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+			border-radius: 8px;
+			overflow: hidden;
+			z-index: 1001;
+		}
+		.user-dropdown:hover .dropdown-content {
+			display: block;
+		}
+		.dropdown-content a {
+			color: #2c3e50 !important;
+			padding: 12px 20px;
+			display: block;
+			font-size: 0.95rem;
+			font-weight: 500;
+			text-decoration: none;
+			transition: background 0.2s;
+		}
+		.dropdown-content a:hover {
+			background-color: #f8f9fa;
+			color: #3498db !important;
+		}
+        
+        @media (max-width: 992px) {
+            .modern-nav {
+                display: none; /* Add a hamburger menu for smaller screens in the future if needed */
+            }
+        }
+	</style>
+
+	<header class="modern-header">
+		<div class="container-fluid">
+			<div class="header-logo">
+				<a href="{% url 'home' %}">
+					<span class="fa fa-heartbeat"></span>
+					<span><span class="logo-sp">Heart Disease</span> Predictor</span>
+				</a>
 			</div>
-		</header>
-		<!-- //top header -->
-
-		<!-- second header -->
-		<div class="main-top" style="background:rgb(44, 164, 182)">
-			<div class="container-fluid">
-				<div class="header d-md-flex justify-content-between align-items-center py-3">
-					<!-- logo -->
-					<div id="logo" style="margin-left:13%">
-						<h1>
-							<a href="{% url 'home' %}">
-								<span class="fa fa-user-md mr-2"></span>
-								<span class="logo-sp">Heart Disease</span> Prediction
-							</a>
-						</h1>
-					</div>
-					<!-- //logo -->
-					<!-- nav -->
+			
+			<div class="header-menu">
+				<ul class="modern-nav">
 					{% if request.user.is_staff %}
-					<div class="nav_w3ls" style="margin-right:4%">
-						<nav>
-							<label for="drop1" class="toggle">Menu</label>
-							<input type="checkbox" id="drop1" />
-							<ul class="menu" style="padding:15px;width:100%">
-
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2"><a href="{% url 'admin_home' %}" >Home</a></li>
-
-								<li>
-									<label for="drop-2" class="toggle toogle-2"> <span class="fa fa-angle-down" aria-hidden="true"></span>
-									</label>
-									<a href="#"> Doctor <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-									<ul style="margin-top:2%;width:40%;margin-right:0%">
-										<li style="width:100%;"><a href="/add_doctor" class="drop-text">Add Doctor</a></li>
-										<li style="width:100%;"><a href="/view_doctor" class="drop-text">View Doctor</a></li>
-									</ul>
-								</li>
-
-
-
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2"><a href="/view_patient">Patient</a></li>
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2">
-									<a href="/view_search_pat">Searched Data</a></li>
-								<li><a href="/view_feedback">Feedback</a></li>
-
-							</ul>
-						</nav>
-					</div>
-					<div class="nav_w3ls" style="margin-right:3%">
-
-						<nav>
-							<label for="drop2" class="toggle">Menu</label>
-							<input type="checkbox" id="drop2" />
-							<ul class="menu">
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2" style="background:red;padding:8px">
-									<!-- First Tier Drop Down -->
-									<label for="drop-2" class="toggle toogle-2"> <span class="fa fa-angle-down" aria-hidden="true"></span>
-									</label>
-									<a href="#"><i class="fa fa-user"></i> {{request.user.username}} <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-									<ul style="margin-top:10%;width:80%;margin-right:5%">
-										<li style="width:100%;"><a href="{% url 'change_password' %}" class="drop-text">Password</a></li>
-										<li style="width:100%;"><a href="{% url 'logout' %}" class="drop-text">Logout</a></li>
-									</ul>
-								</li>
-
-
-
-							</ul>
-						</nav>
-					</div>
-
+						<li><a href="{% url 'admin_home' %}">Dashboard</a></li>
+						<li class="user-dropdown">
+							<a href="#" class="user-dropdown-btn">Doctors <i class="fa fa-angle-down"></i></a>
+							<div class="dropdown-content">
+								<a href="/add_doctor">Add Doctor</a>
+								<a href="/view_doctor">View Doctors</a>
+							</div>
+						</li>
+						<li><a href="/view_patient">Patients</a></li>
+						<li><a href="/view_search_pat">History</a></li>
+						<li><a href="/view_feedback">Feedback</a></li>
+						<li class="user-dropdown">
+							<a href="#" class="user-dropdown-btn"><i class="fa fa-user-circle"></i> {{request.user.username}} <i class="fa fa-angle-down"></i></a>
+							<div class="dropdown-content">
+								<a href="{% url 'change_password' %}">Change Password</a>
+								<a href="{% url 'logout' %}">Logout</a>
+							</div>
+						</li>
 					{% elif request.user.patient_set.all.0 %}
-					<div class="nav_w3ls" style="margin-left:5%;font-weight:bold">
-						<nav>
-							<label for="drop3" class="toggle">Menu</label>
-							<input type="checkbox" id="drop3" />
-							<ul class="menu" style="padding:15px;width:100%">
-								<li><a href="{% url 'patient_home' %}" class="active">Home</a></li>
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2"><a href="/add_heartdetail">Predict</a></li>
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2"><a href="/profile_doctor">My Detail</a></li>
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2"><a href="/sent_feedback">Feedback</a></li>
-								<li><a href="/view_search_pat">History</a></li>
-							</ul>
-						</nav>
-					</div>
-					<div class="nav_w3ls" style="margin-right:3%">
-
-						<nav>
-							<label for="drop4" class="toggle">Menu</label>
-							<input type="checkbox" id="drop4" />
-							<ul class="menu">
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2" style="background:#6a6767;padding:8px">
-									<!-- First Tier Drop Down -->
-									<label for="drop-3" class="toggle toogle-3"> <span class="fa fa-angle-down" aria-hidden="true"></span>
-									</label>
-									<a href="#"><i class="fa fa-sign-in"></i> Hello,{{request.user.username}} <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-									<ul style="margin-top:8%;width:80%;margin-right:5%">
-										<li style="width:100%;"><a href="{% url 'change_password' %}" class="drop-text"> Password</a></li>
-										<li style="width:100%;"><a href="{% url 'logout' %}" class="drop-text"> Logout</a></li>
-									</ul>
-								</li>
-							</ul>
-						</nav>
-					</div>
+						<li><a href="{% url 'patient_home' %}">Dashboard</a></li>
+						<li><a href="/add_heartdetail">Predict</a></li>
+						<li><a href="/profile_doctor">My Profile</a></li>
+						<li><a href="/view_search_pat">History</a></li>
+						<li><a href="/sent_feedback">Feedback</a></li>
+						<li class="user-dropdown">
+							<a href="#" class="user-dropdown-btn"><i class="fa fa-user-circle"></i> {{request.user.username}} <i class="fa fa-angle-down"></i></a>
+							<div class="dropdown-content">
+								<a href="{% url 'change_password' %}">Change Password</a>
+								<a href="{% url 'logout' %}">Logout</a>
+							</div>
+						</li>
 					{% elif request.user.doctor_set.all.0 %}
-					<div class="nav_w3ls" style="margin-right:4%">
-						<nav>
-							<label for="drop5" class="toggle">Menu</label>
-							<input type="checkbox" id="drop5" />
-							<ul class="menu" style="padding:15px;width:100%">
-								<li><a href="{% url 'doctor_home' %}" class="active">Home</a></li>
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2">
-									<a href="/profile_doctor">My Detail</a></li>
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2">
-									<a href="view_search_pat">Searched Data</a></li>
-
-							</ul>
-						</nav>
-					</div>
-					<div class="nav_w3ls" style="margin-right:3%">
-
-						<nav>
-							<label for="drop6" class="toggle">Menu</label>
-							<input type="checkbox" id="drop6" />
-							<ul class="menu">
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2" style="background:#6a6767;padding:8px">
-									<!-- First Tier Drop Down -->
-									<label for="drop6" class="toggle toogle-2"> <span class="fa fa-angle-down" aria-hidden="true"></span>
-									</label>
-									<a href="#"><i class="fa fa-user"></i> {{request.user.username}} <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-									<ul style="margin-top:10%;width:80%;margin-right:5%">
-										<li style="width:100%;"><a href="{% url 'change_password' %}" class="drop-text">Password</a></li>
-										<li style="width:100%;"><a href="{% url 'logout' %}" class="drop-text">Logout</a></li>
-									</ul>
-								</li>
-
-
-
-							</ul>
-						</nav>
-					</div>
+						<li><a href="{% url 'doctor_home' %}">Dashboard</a></li>
+						<li><a href="/profile_doctor">My Profile</a></li>
+						<li><a href="view_search_pat">Searched Data</a></li>
+						<li class="user-dropdown">
+							<a href="#" class="user-dropdown-btn"><i class="fa fa-user-circle"></i> Dr. {{request.user.username}} <i class="fa fa-angle-down"></i></a>
+							<div class="dropdown-content">
+								<a href="{% url 'change_password' %}">Change Password</a>
+								<a href="{% url 'logout' %}">Logout</a>
+							</div>
+						</li>
 					{% else %}
-					<div class="nav_w3ls" style="margin-right:4%">
-						<nav>
-							<label for="drop7" class="toggle">Menu</label>
-							<input type="checkbox" id="drop7" />
-							<ul class="menu" style="padding:15px;width:100%">
-								<li><a href="{% url 'home' %}" class="active">Home</a></li>
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2">
-									<a href="{% url 'about' %}">About Us</a></li>
-								<li><a href="{% url 'contact' %}">Contact Us</a></li>
-							</ul>
-						</nav>
-					</div>
-					<div class="nav_w3ls" style="margin-right:3%">
-
-						<nav>
-							<label for="drop" class="toggle">Menu</label>
-							<input type="checkbox" id="drop" />
-							<ul class="menu">
-								<li class="mx-lg-4 mx-md-3 my-md-0 my-2" style="background:#6a6767;padding:8px">
-									<!-- First Tier Drop Down -->
-									<label for="drop-2" class="toggle toogle-2"> <span class="fa fa-angle-down" aria-hidden="true"></span>
-									</label>
-									<a href="#"><i class="fa fa-sign-in"></i> Login <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-									<ul style="margin-top:10%;width:80%;margin-right:5%">
-										<li style="width:100%;"><a href="{% url 'login_admin' %}" class="drop-text">Admin</a></li>
-										<li style="width:100%;"><a href="{% url 'login' %}" class="drop-text">User</a></li>
-									</ul>
-								</li>
-
-
-
-							</ul>
-						</nav>
-					</div>
+						<li><a href="{% url 'home' %}">Home</a></li>
+						<li><a href="{% url 'about' %}">About Shambhavi</a></li>
+						<li><a href="{% url 'contact' %}">Contact</a></li>
+						<li class="user-dropdown">
+							<a href="#" class="user-dropdown-btn"><i class="fa fa-sign-in"></i> Login <i class="fa fa-angle-down"></i></a>
+							<div class="dropdown-content">
+								<a href="{% url 'login' %}">Patient Login</a>
+								<a href="{% url 'login_admin' %}">Admin / Doctor Login</a>
+							</div>
+						</li>
 					{% endif %}
-
-
-					<!-- //nav -->
-				</div>
+				</ul>
 			</div>
 		</div>
-		<!-- //second header -->
+	</header>
+	<!-- //modern header -->
 
 		<!-- banner -->
 		{% block body %}
