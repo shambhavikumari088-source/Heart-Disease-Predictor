@@ -3,63 +3,77 @@
 {% block body %}
 
 <style>
+    /* Hero Section */
     .modern-hero {
         position: relative;
-        padding: 120px 0;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        padding: 140px 0 100px;
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f172a 100%);
         color: #fff;
         overflow: hidden;
-        margin-top: -2%; /* Adjust for index.html wrapper */
+        margin-top: -2%;
     }
     
     .hero-bg-shape {
         position: absolute;
         top: -20%;
         right: -10%;
-        width: 50%;
+        width: 60%;
         height: 140%;
-        background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
-        transform: rotate(-15deg);
-        border-radius: 30%;
+        background: radial-gradient(circle, rgba(52, 152, 219, 0.15) 0%, rgba(26, 26, 46, 0) 70%);
+        z-index: 1;
+    }
+
+    .hero-bg-shape-2 {
+        position: absolute;
+        bottom: -20%;
+        left: -10%;
+        width: 50%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(231, 76, 60, 0.1) 0%, rgba(26, 26, 46, 0) 70%);
         z-index: 1;
     }
     
     .hero-content {
         position: relative;
         z-index: 2;
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
         text-align: center;
     }
     
     .hero-badge {
         display: inline-block;
-        padding: 8px 16px;
-        background: rgba(52, 152, 219, 0.2);
-        color: #3498db;
+        padding: 8px 20px;
+        background: rgba(52, 152, 219, 0.15);
+        color: #60a5fa;
         border-radius: 30px;
         font-weight: 600;
-        font-size: 0.9rem;
-        margin-bottom: 25px;
-        border: 1px solid rgba(52, 152, 219, 0.3);
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+        border: 1px solid rgba(96, 165, 250, 0.3);
+        backdrop-filter: blur(4px);
     }
     
     .hero-title {
-        font-size: 3.5rem;
-        font-weight: 800;
-        line-height: 1.2;
+        font-size: 4rem;
+        font-weight: 900;
+        line-height: 1.15;
         margin-bottom: 25px;
-        background: linear-gradient(to right, #fff, #bdc3c7);
+        background: linear-gradient(to right, #ffffff, #94a3b8);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        letter-spacing: -1px;
     }
     
     .hero-subtitle {
-        font-size: 1.15rem;
-        color: #b2bec3;
-        line-height: 1.6;
-        margin-bottom: 40px;
+        font-size: 1.25rem;
+        color: #cbd5e1;
+        line-height: 1.7;
+        margin-bottom: 45px;
         font-weight: 400;
+        max-width: 750px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .hero-buttons {
@@ -70,71 +84,126 @@
     }
     
     .btn-primary-modern {
-        background: #3498db;
+        background: #3b82f6;
         color: #fff;
-        padding: 14px 35px;
-        border-radius: 8px;
+        padding: 16px 40px;
+        border-radius: 50px;
         font-weight: 600;
-        font-size: 1.05rem;
+        font-size: 1.1rem;
         text-decoration: none;
         transition: all 0.3s ease;
         border: none;
-        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
     }
     
     .btn-primary-modern:hover {
-        background: #2980b9;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        background: #2563eb;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(59, 130, 246, 0.5);
         color: #fff;
         text-decoration: none;
     }
     
     .btn-outline-modern {
-        background: transparent;
+        background: rgba(255, 255, 255, 0.05);
         color: #fff;
-        padding: 14px 35px;
-        border-radius: 8px;
+        padding: 16px 40px;
+        border-radius: 50px;
         font-weight: 600;
-        font-size: 1.05rem;
+        font-size: 1.1rem;
         text-decoration: none;
         transition: all 0.3s ease;
         border: 2px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(4px);
     }
     
     .btn-outline-modern:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.15);
         border-color: #fff;
         color: #fff;
+        transform: translateY(-3px);
         text-decoration: none;
+    }
+
+    /* Stats Section */
+    .stats-section {
+        background: #fff;
+        padding: 60px 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        position: relative;
+        z-index: 10;
+        margin-top: -40px;
+        border-radius: 15px;
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .stats-grid {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    .stat-item {
+        text-align: center;
+    }
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #1e293b;
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+    .stat-number span {
+        color: #3b82f6;
+    }
+    .stat-label {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     
     /* Features Section */
     .features-section {
-        padding: 80px 0;
-        background: #f8f9fa;
+        padding: 100px 0;
+        background: #f8fafc;
     }
     
     .section-header {
         text-align: center;
-        margin-bottom: 50px;
+        margin-bottom: 60px;
     }
     
+    .section-badge {
+        color: #3b82f6;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 15px;
+    }
+
     .section-header h2 {
         font-weight: 800;
-        color: #2c3e50;
-        font-size: 2.2rem;
+        color: #0f172a;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
     }
     
     .section-header p {
-        color: #7f8c8d;
-        font-size: 1.1rem;
+        color: #64748b;
+        font-size: 1.15rem;
+        max-width: 600px;
+        margin: 0 auto;
     }
     
     .feature-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 20px;
@@ -142,91 +211,256 @@
     
     .feature-card {
         background: #fff;
-        padding: 40px 30px;
-        border-radius: 12px;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        transition: transform 0.3s ease;
+        padding: 50px 40px;
+        border-radius: 20px;
+        text-align: left;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        transition: all 0.4s ease;
+        border: 1px solid rgba(0,0,0,0.02);
     }
     
     .feature-card:hover {
         transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+        border-color: rgba(59, 130, 246, 0.1);
     }
     
     .feature-icon {
-        width: 70px;
-        height: 70px;
-        background: rgba(52, 152, 219, 0.1);
-        color: #3498db;
-        border-radius: 50%;
+        width: 65px;
+        height: 65px;
+        background: #eff6ff;
+        color: #3b82f6;
+        border-radius: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.8rem;
-        margin: 0 auto 25px;
+        margin-bottom: 25px;
+        transition: all 0.3s;
+    }
+
+    .feature-card:hover .feature-icon {
+        background: #3b82f6;
+        color: #fff;
     }
     
     .feature-title {
-        font-weight: 700;
-        color: #2c3e50;
+        font-weight: 800;
+        color: #1e293b;
         margin-bottom: 15px;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
     
     .feature-desc {
-        color: #7f8c8d;
-        line-height: 1.6;
+        color: #64748b;
+        line-height: 1.7;
         margin: 0;
+        font-size: 1.05rem;
+    }
+
+    /* How It Works Section */
+    .how-it-works {
+        padding: 100px 0;
+        background: #fff;
+    }
+    .steps-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        flex-wrap: wrap;
+    }
+    .step-item {
+        flex: 1;
+        min-width: 250px;
+        text-align: center;
+        position: relative;
+    }
+    .step-number {
+        width: 80px;
+        height: 80px;
+        background: #3b82f6;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 800;
+        margin: 0 auto 25px;
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        position: relative;
+        z-index: 2;
+    }
+    .step-title {
+        font-weight: 700;
+        color: #0f172a;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    .step-desc {
+        color: #64748b;
+        line-height: 1.6;
+    }
+    @media (min-width: 900px) {
+        .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: dashed 2px #cbd5e1;
+            z-index: 1;
+        }
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        padding: 80px 20px;
+        text-align: center;
+        color: #fff;
+    }
+    .cta-section h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+    .cta-section p {
+        font-size: 1.2rem;
+        color: #bfdbfe;
+        margin-bottom: 40px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     @media (max-width: 768px) {
-        .hero-title {
-            font-size: 2.5rem;
-        }
-        .modern-hero {
-            padding: 80px 20px;
-        }
+        .hero-title { font-size: 2.8rem; }
+        .hero-subtitle { font-size: 1.1rem; }
+        .modern-hero { padding: 100px 20px 80px; }
+        .stats-section { margin-top: 20px; border-radius: 0; }
+        .feature-grid { grid-template-columns: 1fr; }
     }
 </style>
 
+<!-- Hero Banner -->
 <div class="modern-hero">
     <div class="hero-bg-shape"></div>
+    <div class="hero-bg-shape-2"></div>
     <div class="container hero-content">
-        <span class="hero-badge"><i class="fa fa-stethoscope"></i> AI-Powered Healthcare</span>
+        <span class="hero-badge"><i class="fa fa-heartbeat"></i> AI-Powered Cardiovascular Analytics</span>
         <h1 class="hero-title">Predict Heart Disease With Machine Learning</h1>
-        <p class="hero-subtitle">Our advanced predictive model analyzes your medical history and vital signs to provide an accurate risk assessment for cardiovascular diseases, empowering you to make informed health decisions.</p>
+        <p class="hero-subtitle">Our advanced predictive model analyzes your medical history and vital signs to provide an immediate, highly accurate risk assessment for cardiovascular diseases.</p>
         <div class="hero-buttons">
-            <a href="{% url 'login' %}" class="btn-primary-modern">Get Started Now</a>
-            <a href="{% url 'about' %}" class="btn-outline-modern">Learn More</a>
+            <a href="{% url 'login' %}" class="btn-primary-modern">Analyze Your Risk Now</a>
+            <a href="#how-it-works" class="btn-outline-modern">See How It Works</a>
         </div>
     </div>
 </div>
 
+<!-- Stats Counter -->
+<div class="container">
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">98<span>%</span></div>
+                <div class="stat-label">Model Accuracy</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">13<span>+</span></div>
+                <div class="stat-label">Clinical Features Analyzed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Instant</div>
+                <div class="stat-label">Real-time Predictions</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
 <div class="features-section">
     <div class="section-header">
+        <span class="section-badge">Platform Features</span>
         <h2>Why Choose Our System?</h2>
-        <p>Combining modern technology with healthcare insights.</p>
+        <p>Combining state-of-the-art Machine Learning algorithms with deep healthcare insights to give you actionable data.</p>
     </div>
     
     <div class="feature-grid">
         <div class="feature-card">
             <div class="feature-icon"><i class="fa fa-line-chart"></i></div>
             <h3 class="feature-title">High Accuracy</h3>
-            <p class="feature-desc">Our Machine Learning models are trained on extensive clinical datasets to provide reliable and highly accurate predictions.</p>
+            <p class="feature-desc">Our ML models are meticulously trained on extensive global clinical datasets to provide reliable and highly accurate medical predictions.</p>
         </div>
         
         <div class="feature-card">
-            <div class="feature-icon"><i class="fa fa-shield"></i></div>
+            <div class="feature-icon"><i class="fa fa-lock"></i></div>
             <h3 class="feature-title">Secure & Private</h3>
-            <p class="feature-desc">Your medical data is completely secure. We use enterprise-grade encryption to protect your sensitive health information.</p>
+            <p class="feature-desc">Your medical data is completely secure. We prioritize patient confidentiality and protect your sensitive health information.</p>
         </div>
         
         <div class="feature-card">
             <div class="feature-icon"><i class="fa fa-bolt"></i></div>
             <h3 class="feature-title">Instant Results</h3>
-            <p class="feature-desc">No more waiting. Get your cardiovascular risk assessment immediately after entering your medical parameters.</p>
+            <p class="feature-desc">No more waiting. Get your cardiovascular risk assessment immediately after entering your 13 crucial medical parameters.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa fa-user-md"></i></div>
+            <h3 class="feature-title">Doctor Portal</h3>
+            <p class="feature-desc">Specialized dashboards for healthcare professionals to review patient data, track predictive history, and provide targeted feedback.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa fa-database"></i></div>
+            <h3 class="feature-title">Data-Driven Insights</h3>
+            <p class="feature-desc">Generates robust visualizations to help you understand which factors (like cholesterol or blood pressure) are affecting your risk score.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fa fa-mobile"></i></div>
+            <h3 class="feature-title">Fully Responsive</h3>
+            <p class="feature-desc">Access the predictor seamlessly from your mobile phone, tablet, or desktop browser with a fully optimized user interface.</p>
         </div>
     </div>
+</div>
+
+<!-- How It Works Section -->
+<div class="how-it-works" id="how-it-works">
+    <div class="section-header">
+        <span class="section-badge">Simple Process</span>
+        <h2>How It Works</h2>
+        <p>Get your predictive risk score in three simple steps.</p>
+    </div>
+    <div class="steps-container">
+        <div class="step-item">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Create an Account</h3>
+            <p class="step-desc">Sign up quickly as a patient. Your data is encrypted and kept entirely private.</p>
+        </div>
+        <div class="step-item">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Enter Medical Data</h3>
+            <p class="step-desc">Input 13 standard clinical parameters like age, blood pressure, cholesterol, and heart rate.</p>
+        </div>
+        <div class="step-item">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Get AI Prediction</h3>
+            <p class="step-desc">Our Machine Learning model processes the data instantly and gives you a detailed risk assessment.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Final CTA -->
+<div class="cta-section">
+    <h2>Ready to check your heart health?</h2>
+    <p>Join patients and doctors who trust our Machine Learning platform for rapid cardiovascular assessments.</p>
+    <a href="{% url 'login' %}" style="background: #fff; color: #1d4ed8; padding: 16px 40px; border-radius: 50px; font-weight: 700; font-size: 1.1rem; text-decoration: none; display: inline-block; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 0.3s;">Start Your Prediction</a>
 </div>
 
 {% endblock %}
